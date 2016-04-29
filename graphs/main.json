@@ -1,0 +1,15 @@
+{
+    "properties": {
+        "name": "main",
+        "environment": {
+            "type": "all"
+        },
+        "description": "Interface Transformations",
+        "icon": "fa-calendar-check-o "
+    },
+    "inports": {},
+    "outports": {},
+    "groups": [],
+    "processes": {},
+    "connections": []
+}
