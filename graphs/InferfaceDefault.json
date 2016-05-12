@@ -3,18 +3,51 @@
         "name": "InferfaceDefault",
         "environment": {
             "type": "noflo-nodejs"
+        },
+        "icon": "fa-download"
+    },
+    "inports": {
+        "token": {
+            "process": "strings/Base64Encode_sgnq5",
+            "port": "in",
+            "metadata": {
+                "x": -720,
+                "y": 36,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "url": {
+            "process": "http/ConfigRequest_bw2r8",
+            "port": "href",
+            "metadata": {
+                "x": -720,
+                "y": -216,
+                "width": 72,
+                "height": 72
+            }
         }
     },
-    "inports": {},
-    "outports": {},
+    "outports": {
+        "out": {
+            "process": "strings/ParseJson_8kj3j",
+            "port": "out",
+            "metadata": {
+                "x": 252,
+                "y": -108,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
     "groups": [],
     "processes": {
         "http/SendRequest_o92sd": {
             "component": "http/SendRequest",
             "metadata": {
                 "label": "http/SendRequest",
-                "x": 288,
-                "y": 144,
+                "x": -144,
+                "y": -72,
                 "width": 72,
                 "height": 72
             }
@@ -23,8 +56,8 @@
             "component": "http/Headers",
             "metadata": {
                 "label": "http/Headers",
-                "x": 144,
-                "y": 144,
+                "x": -288,
+                "y": -72,
                 "width": 72,
                 "height": 72
             }
@@ -33,8 +66,8 @@
             "component": "http/ConfigRequest",
             "metadata": {
                 "label": "http/ConfigRequest",
-                "x": -36,
-                "y": 36,
+                "x": -468,
+                "y": -180,
                 "width": 72,
                 "height": 72
             }
@@ -43,8 +76,8 @@
             "component": "strings/Base64Encode",
             "metadata": {
                 "label": "strings/Base64Encode",
-                "x": -180,
-                "y": 324,
+                "x": -576,
+                "y": 0,
                 "width": 72,
                 "height": 72
             }
@@ -53,18 +86,8 @@
             "component": "strings/TemplateReplace",
             "metadata": {
                 "label": "strings/TemplateReplace",
-                "x": -72,
-                "y": 216,
-                "width": 72,
-                "height": 72
-            }
-        },
-        "core/Output_vqly9": {
-            "component": "core/Output",
-            "metadata": {
-                "label": "core/Output",
-                "x": 576,
-                "y": 144,
+                "x": -432,
+                "y": -36,
                 "width": 72,
                 "height": 72
             }
@@ -73,18 +96,28 @@
             "component": "core/Repeat",
             "metadata": {
                 "label": "core/Repeat",
-                "x": 144,
-                "y": 288,
+                "x": -288,
+                "y": -216,
                 "width": 72,
                 "height": 72
             }
         },
-        "http/ReceiveResponse_j2s6e": {
+        "http/ReceiveResponse_hr2ku": {
             "component": "http/ReceiveResponse",
             "metadata": {
                 "label": "http/ReceiveResponse",
-                "x": 432,
-                "y": 144,
+                "x": -36,
+                "y": -180,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "strings/ParseJson_8kj3j": {
+            "component": "strings/ParseJson",
+            "metadata": {
+                "label": "strings/ParseJson",
+                "x": 108,
+                "y": -108,
                 "width": 72,
                 "height": 72
             }
@@ -119,32 +152,6 @@
         },
         {
             "src": {
-                "process": "http/Headers_zogd0",
-                "port": "out"
-            },
-            "tgt": {
-                "process": "http/SendRequest_o92sd",
-                "port": "url"
-            },
-            "metadata": {
-                "route": null
-            }
-        },
-        {
-            "src": {
-                "process": "http/SendRequest_o92sd",
-                "port": "request"
-            },
-            "tgt": {
-                "process": "http/ReceiveResponse_j2s6e",
-                "port": "request"
-            },
-            "metadata": {
-                "route": 0
-            }
-        },
-        {
-            "src": {
                 "process": "core/Repeat_qnez1",
                 "port": "out"
             },
@@ -164,6 +171,40 @@
             "tgt": {
                 "process": "http/Headers_zogd0",
                 "port": "headers"
+            }
+        },
+        {
+            "src": {
+                "process": "http/SendRequest_o92sd",
+                "port": "request"
+            },
+            "tgt": {
+                "process": "http/ReceiveResponse_hr2ku",
+                "port": "request"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "http/Headers_zogd0",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "http/SendRequest_o92sd",
+                "port": "url"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "http/ReceiveResponse_hr2ku",
+                "port": "message"
+            },
+            "tgt": {
+                "process": "strings/ParseJson_8kj3j",
+                "port": "in"
             },
             "metadata": {}
         },
@@ -175,24 +216,10 @@
             }
         },
         {
-            "data": "<token><version>1</version><data>1455E0B6A2074AC3BD3282BCB6E9DB6A1E9D17924385C03C7C6B24BEA70FB3A4</data></token>",
-            "tgt": {
-                "process": "strings/Base64Encode_sgnq5",
-                "port": "in"
-            }
-        },
-        {
             "data": ":-)",
             "tgt": {
                 "process": "core/Repeat_qnez1",
                 "port": "in"
-            }
-        },
-        {
-            "data": "https://ota79685.afasonlineconnector.nl/profitrestservices/connectors/VPLAN_project?skip1&take=1&filterfieldids=afas_created_at;afas_created_at&filtervalues=2016-05-10T00:01:00;2016-05-10T00:01:00&operatortypes=2;2",
-            "tgt": {
-                "process": "http/ConfigRequest_bw2r8",
-                "port": "href"
             }
         },
         {
@@ -203,7 +230,7 @@
             }
         },
         {
-            "data": "{\"Authorization\" : \"AfasToken __TOKEN__\"}",
+            "data": "{\"Authorization\":\"AfasToken __TOKEN__\"}",
             "tgt": {
                 "process": "strings/TemplateReplace_3wu7d",
                 "port": "template"
