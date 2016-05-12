@@ -10,6 +10,163 @@
     "inports": {},
     "outports": {},
     "groups": [],
-    "processes": {},
-    "connections": []
+    "processes": {
+        "WorkFlowInterfacing/Afas_fiqsh": {
+            "component": "WorkFlowInterfacing/Afas",
+            "metadata": {
+                "label": "WorkFlowInterfacing/Afas",
+                "x": 972,
+                "y": 576,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Output_wxew7": {
+            "component": "core/Output",
+            "metadata": {
+                "label": "core/Output",
+                "x": 1512,
+                "y": 504,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "objects/ExtractProperty_uxosj": {
+            "component": "objects/ExtractProperty",
+            "metadata": {
+                "label": "objects/ExtractProperty",
+                "x": 1116,
+                "y": 432,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "objects/Size_6xhcl": {
+            "component": "objects/Size",
+            "metadata": {
+                "label": "objects/Size",
+                "x": 1224,
+                "y": 396,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "math/Compare_tnjui": {
+            "component": "math/Compare",
+            "metadata": {
+                "label": "math/Compare",
+                "x": 1368,
+                "y": 396,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "objects/ExtractProperty_uxosj",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "objects/Size_6xhcl",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "WorkFlowInterfacing/Afas_fiqsh",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "objects/ExtractProperty_uxosj",
+                "port": "in"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "objects/Size_6xhcl",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "math/Compare_tnjui",
+                "port": "value"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "math/Compare_tnjui",
+                "port": "fail"
+            },
+            "tgt": {
+                "process": "core/Output_wxew7",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "WorkFlowInterfacing/Afas_fiqsh",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "core/Output_wxew7",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "math/Compare_tnjui",
+                "port": "pass"
+            },
+            "tgt": {
+                "process": "core/Output_wxew7",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "data": "<token><version>1</version><data>1455E0B6A2074AC3BD3282BCB6E9DB6A1E9D17924385C03C7C6B24BEA70FB3A4</data></token>",
+            "tgt": {
+                "process": "WorkFlowInterfacing/Afas_fiqsh",
+                "port": "token"
+            }
+        },
+        {
+            "data": "rows",
+            "tgt": {
+                "process": "objects/ExtractProperty_uxosj",
+                "port": "key"
+            }
+        },
+        {
+            "data": 0,
+            "tgt": {
+                "process": "math/Compare_tnjui",
+                "port": "comparison"
+            }
+        },
+        {
+            "data": ">",
+            "tgt": {
+                "process": "math/Compare_tnjui",
+                "port": "operator"
+            }
+        },
+        {
+            "data": "https://ota79685.afasonlineconnector.nl/profitrestservices/connectors/VPLAN_project?skip=0&take=1&filterfieldids=afas_created_at;afas_created_at&filtervalues=2016-05-10T00:01:00;2016-05-10T00:01:00&operatortypes=2;2",
+            "tgt": {
+                "process": "WorkFlowInterfacing/Afas_fiqsh",
+                "port": "url"
+            }
+        }
+    ]
 }

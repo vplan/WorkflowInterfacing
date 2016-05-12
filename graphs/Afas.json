@@ -22,8 +22,8 @@
             "process": "http/ConfigRequest_bw2r8",
             "port": "href",
             "metadata": {
-                "x": -720,
-                "y": -216,
+                "x": -792,
+                "y": -288,
                 "width": 72,
                 "height": 72
             }
@@ -195,8 +195,7 @@
             "tgt": {
                 "process": "http/SendRequest_o92sd",
                 "port": "url"
-            },
-            "metadata": {}
+            }
         },
         {
             "src": {
@@ -206,8 +205,7 @@
             "tgt": {
                 "process": "strings/ParseJson_8kj3j",
                 "port": "in"
-            },
-            "metadata": {}
+            }
         },
         {
             "data": "GET",
