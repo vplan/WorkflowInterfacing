@@ -4,15 +4,16 @@
         "environment": {
             "type": "noflo-nodejs"
         },
-        "icon": "fa-download"
+        "description": "Get Afas Data",
+        "icon": "download"
     },
     "inports": {
         "token": {
             "process": "strings/Base64Encode_sgnq5",
             "port": "in",
             "metadata": {
-                "x": -720,
-                "y": 36,
+                "x": -756,
+                "y": 72,
                 "width": 72,
                 "height": 72
             }
@@ -106,8 +107,8 @@
             "component": "http/ReceiveResponse",
             "metadata": {
                 "label": "http/ReceiveResponse",
-                "x": -36,
-                "y": -180,
+                "x": 0,
+                "y": -252,
                 "width": 72,
                 "height": 72
             }
