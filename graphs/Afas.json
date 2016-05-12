@@ -3,11 +3,239 @@
         "name": "Afas",
         "environment": {
             "type": "noflo-nodejs"
+        },
+        "description": "Get Afas Data",
+        "icon": "download"
+    },
+    "inports": {
+        "token": {
+            "process": "strings/Base64Encode_sgnq5",
+            "port": "in",
+            "metadata": {
+                "x": -756,
+                "y": 72,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "url": {
+            "process": "http/ConfigRequest_bw2r8",
+            "port": "href",
+            "metadata": {
+                "x": -720,
+                "y": -216,
+                "width": 72,
+                "height": 72
+            }
         }
     },
-    "inports": {},
-    "outports": {},
+    "outports": {
+        "out": {
+            "process": "strings/ParseJson_8kj3j",
+            "port": "out",
+            "metadata": {
+                "x": 252,
+                "y": -108,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
     "groups": [],
-    "processes": {},
-    "connections": []
+    "processes": {
+        "http/SendRequest_o92sd": {
+            "component": "http/SendRequest",
+            "metadata": {
+                "label": "http/SendRequest",
+                "x": -144,
+                "y": -72,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "http/Headers_zogd0": {
+            "component": "http/Headers",
+            "metadata": {
+                "label": "http/Headers",
+                "x": -288,
+                "y": -72,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "http/ConfigRequest_bw2r8": {
+            "component": "http/ConfigRequest",
+            "metadata": {
+                "label": "http/ConfigRequest",
+                "x": -468,
+                "y": -180,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "strings/Base64Encode_sgnq5": {
+            "component": "strings/Base64Encode",
+            "metadata": {
+                "label": "strings/Base64Encode",
+                "x": -576,
+                "y": 0,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "strings/TemplateReplace_3wu7d": {
+            "component": "strings/TemplateReplace",
+            "metadata": {
+                "label": "strings/TemplateReplace",
+                "x": -432,
+                "y": -36,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Repeat_qnez1": {
+            "component": "core/Repeat",
+            "metadata": {
+                "label": "core/Repeat",
+                "x": -288,
+                "y": -216,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "http/ReceiveResponse_hr2ku": {
+            "component": "http/ReceiveResponse",
+            "metadata": {
+                "label": "http/ReceiveResponse",
+                "x": 0,
+                "y": -252,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "strings/ParseJson_8kj3j": {
+            "component": "strings/ParseJson",
+            "metadata": {
+                "label": "strings/ParseJson",
+                "x": 108,
+                "y": -108,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "strings/Base64Encode_sgnq5",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "strings/TemplateReplace_3wu7d",
+                "port": "in"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "http/ConfigRequest_bw2r8",
+                "port": "url"
+            },
+            "tgt": {
+                "process": "http/Headers_zogd0",
+                "port": "url"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "core/Repeat_qnez1",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "http/SendRequest_o92sd",
+                "port": "start"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "strings/TemplateReplace_3wu7d",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "http/Headers_zogd0",
+                "port": "headers"
+            }
+        },
+        {
+            "src": {
+                "process": "http/SendRequest_o92sd",
+                "port": "request"
+            },
+            "tgt": {
+                "process": "http/ReceiveResponse_hr2ku",
+                "port": "request"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "http/Headers_zogd0",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "http/SendRequest_o92sd",
+                "port": "url"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "http/ReceiveResponse_hr2ku",
+                "port": "message"
+            },
+            "tgt": {
+                "process": "strings/ParseJson_8kj3j",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "data": "GET",
+            "tgt": {
+                "process": "http/ConfigRequest_bw2r8",
+                "port": "method"
+            }
+        },
+        {
+            "data": ":-)",
+            "tgt": {
+                "process": "core/Repeat_qnez1",
+                "port": "in"
+            }
+        },
+        {
+            "data": "__TOKEN__",
+            "tgt": {
+                "process": "strings/TemplateReplace_3wu7d",
+                "port": "token"
+            }
+        },
+        {
+            "data": "{\"Authorization\":\"AfasToken __TOKEN__\"}",
+            "tgt": {
+                "process": "strings/TemplateReplace_3wu7d",
+                "port": "template"
+            }
+        }
+    ]
 }
